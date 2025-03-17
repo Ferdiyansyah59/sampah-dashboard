@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: laravel-app
+        container_name: laranierp-app
+        restart: unless-stopped
+        working_dir: /var/www
+        volumes:
+            - .:/var/www
+            - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+            - anierp-laravel
+
+    web:
+        image: nginx:alpine
+        container_name: sampah-nginx
+        restart: unless-stopped
+        ports:
+            - "59:80"
+        volumes:
+            - .:/var/www
+            - ./nginx/conf.d:/etc/nginx/conf.d
+        networks:
+            - anierp-laravel
+networks:
+    anierp-laravel:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
