@@ -6,7 +6,7 @@ services:
             context: .
             dockerfile: Dockerfile
         image: laravel-app
-        container_name: laranierp-app
+        container_name: sampahadmin-app
         restart: unless-stopped
         working_dir: /var/www
         volumes:
