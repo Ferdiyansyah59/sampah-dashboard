@@ -20,7 +20,7 @@ services:
         container_name: sampah-nginx
         restart: unless-stopped
         ports:
-            - "59:80"
+            - "8859:80"
         volumes:
             - .:/var/www
             - ./nginx/conf.d:/etc/nginx/conf.d
