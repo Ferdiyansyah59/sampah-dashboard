@@ -18,7 +18,7 @@
                 @endif
 
                 <div class="d-flex justify-content-center" >
-                  <img height="100" src="{{ asset('img/logo.png') }}" alt="logo">
+                  <img height="100" src="{{ secure_asset('img/logo.png') }}" alt="logo">
                 </div>
                 <main class="form-signin f-flex mt-3">
                   <h1 class="h3 mb-3 fw-bold text-center">Login TemanBumi</h1>

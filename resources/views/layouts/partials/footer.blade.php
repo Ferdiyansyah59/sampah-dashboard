@@ -14,21 +14,21 @@
 
 @stack('modal')
 
-<script src="{{ asset('vendors/jquery/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ secure_asset('vendors/jquery/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ secure_asset('vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ secure_asset('js/bootstrap.bundle.min.js') }}"></script>
 
-<script src="{{ asset('vendors/apexcharts/apexcharts.js') }}"></script>
+<script src="{{ secure_asset('vendors/apexcharts/apexcharts.js') }}"></script>
 
-<script src="{{ asset('vendors/toastify/toastify.js') }}"></script>
+<script src="{{ secure_asset('vendors/toastify/toastify.js') }}"></script>
 
-<script src="{{ asset('vendors/datatable/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('vendors/datatable/dataTables.bootstrap5.min.js') }}"></script>
-<script src="{{ asset('vendors/sweetalert2/sweetalert2.all.min.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
-<script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
-<script src="{{ asset('vendors/flatpickr/flatpickr.js') }}"></script>
-<script src="{{ asset('vendors/flatpickr/id.js') }}"></script>
+<script src="{{ secure_asset('vendors/datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ secure_asset('vendors/datatable/dataTables.bootstrap5.min.js') }}"></script>
+<script src="{{ secure_asset('vendors/sweetalert2/sweetalert2.all.min.js') }}"></script>
+<script src="{{ secure_asset('js/main.js') }}"></script>
+<script src="{{ secure_asset('vendors/select2/select2.min.js') }}"></script>
+<script src="{{ secure_asset('vendors/flatpickr/flatpickr.js') }}"></script>
+<script src="{{ secure_asset('vendors/flatpickr/id.js') }}"></script>
 
 <script>
 	$(function () {
@@ -41,7 +41,7 @@
 
 		$.extend(true, $.fn.dataTable.defaults, {
 			language: {
-				url: "{{ asset('vendors/datatable/plugins/id.json') }}",
+				url: "{{ secure_asset('vendors/datatable/plugins/id.json') }}",
 			},
 			"pageLength": 5,
 			"lengthMenu": [[5, 20, 25, 50, -1], [5, 20, 25, 50, 'All']]

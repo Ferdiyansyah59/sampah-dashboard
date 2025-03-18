@@ -15,6 +15,7 @@
                  </form>
                 
                  @if ($article->image !== 'kosong')
+                 <p>Punten {{ $article->image }}</p>
                  <div style="max-height: 600px; overflow: hidden;"> <!-- Overflow itu kl misalnya bablas ngelebihin max-height nya -->
                      <img src="{{ env('STORAGE_URL') . $article->image }}" class="img-fluid mt-2" alt="{{ $article->title }}">
                  </div>

@@ -33,7 +33,7 @@
               <label for="image" class="form-label">Post Image</label>
               @if ($article->image !== 'kosong')
               <input type="hidden" name="oldImage" value="{{ $article->image }}">
-              <img src="{{ asset('storage/'.$article->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+              <img src="{{ secure_asset(env('STORAGE_URL').$article->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
               @else
               <img class="img-preview img-fluid mb-3 col-sm-5">
               @endif

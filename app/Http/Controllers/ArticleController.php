@@ -38,10 +38,9 @@ class ArticleController extends Controller
             'slug' => 'required|unique:articles',
             'image' => 'required|image|file|max:2048|mimes:jpeg,png,jpg,gif,webp',
             'description' => 'required',
-            'views' => 'required'
         ]);
 
-        if($request->file('image')){
+        if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
 
@@ -77,35 +76,38 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $rules = [
-            'title' => 'required|max:255',
-            'image' => 'image|file|max:2048|mimes:jpeg,png,jpg,gif,webp',
-            'description' => 'required',
-            'views' => 'required'
-        ];
+        try {
+            $rules = [
+                'title' => 'required|max:255',
+                'image' => 'image|file|max:2048|mimes:jpeg,png,jpg,gif,webp',
+                'description' => 'required',
+            ];
 
-        $article = Article::where('slug', $id)->firstorfail();
+            $article = Article::where('slug', $id)->firstorfail();
 
-        
-        if($request->slug != $article->slug){
-            $rules['slug'] = 'required|unique:articles';
-        }
-        
-        $validatedData = $request->validate($rules);
-        
-        if($request->file('image')){
-            if($request->oldImage){
-                Storage::delete($request->oldImage);
+
+            if ($request->slug != $article->slug) {
+                $rules['slug'] = 'required|unique:articles';
             }
-            $validatedData['image'] = $request->file('image')->store('post-images');
+
+            $validatedData = $request->validate($rules);
+
+            if ($request->file('image')) {
+                if ($request->oldImage) {
+                    Storage::delete($request->oldImage);
+                }
+                $validatedData['image'] = $request->file('image')->store('post-images');
+            }
+
+            $validatedData['excerpt'] = Str::limit(strip_tags($request->description), 110);
+
+            Article::where('id', $article->id)
+                ->update($validatedData);
+
+            return redirect('/dashboard')->with('success', "Post has been updated!");
+        } catch (\Exception $e) {
+            dd($e->getMessage());
         }
-         
-        $validatedData['excerpt'] = Str::limit(strip_tags($request->description), 110);
-
-        Article::where('id', $article->id)
-            ->update($validatedData);
-
-        return redirect('/dashboard')->with('success', "Post has been updated!");
     }
 
     /**
@@ -114,17 +116,17 @@ class ArticleController extends Controller
     public function destroy(string $id)
     {
         $article = Article::where('slug', $id)->firstorfail();
-        if($article->image) {
+        if ($article->image) {
             Storage::delete($article->image);
         }
         Article::destroy($article->id);
         return  redirect('/dashboard')->with('success', 'Post has been deleted!');
     }
 
-    public function checkSlug(Request $request){
+    public function checkSlug(Request $request)
+    {
 
-       $slug = SlugService::createSlug(Article::class, 'slug', $request->title); // title itu url yang parameternya dari js yang di create
-       return response()->json(['slug' => $slug]);
-      
+        $slug = SlugService::createSlug(Article::class, 'slug', $request->title); // title itu url yang parameternya dari js yang di create
+        return response()->json(['slug' => $slug]);
     }
 }
